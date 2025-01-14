@@ -25,9 +25,6 @@ public class RandomSpherePosition : MonoBehaviour
 
         // Start the first trial
         PlaceSphereRandomly();
-
-        // Get the MeshRenderer component
-        sphereRenderer = GetComponent<MeshRenderer>();
     }
 
     void PlaceSphereRandomly()
@@ -43,7 +40,6 @@ public class RandomSpherePosition : MonoBehaviour
 
             // Randomly decide if the sphere should cast a shadow
             bool castShadow = Random.Range(0, 2) == 0; // 50% chance for shadow on or off
-            SetShadow(castShadow);
 
             // Update trial count
             currentTrial++;
@@ -54,19 +50,6 @@ public class RandomSpherePosition : MonoBehaviour
         }
     }
 
-    void SetShadow(bool enable)
-    {
-        if (enable)
-        {
-            // Enable shadow casting
-            sphereRenderer.shadowCastingMode = ShadowCastingMode.On;
-        }
-        else
-        {
-            // Disable shadow casting
-            sphereRenderer.shadowCastingMode = ShadowCastingMode.Off;
-        }
-    }
 
     // Call this method whenever the trial is supposed to advance (e.g., after user response)
     public void NextTrial()
