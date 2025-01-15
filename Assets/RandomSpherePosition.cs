@@ -17,14 +17,31 @@ public class RandomSpherePosition : MonoBehaviour
 
     // Reference to the MeshRenderer for controlling shadows
     private MeshRenderer sphereRenderer;
+    private bool isTriggerPressed = false;
 
     void Start()
     {
         // Store the initial position of the sphere
         startingPosition = transform.position;
 
-        // Start the first trial
-        PlaceSphereRandomly();
+
+    }
+
+    void Update()
+    {
+        // Check if the trigger button is pressed (example for XR controller)
+        if (Input.GetButtonDown("Fire1"))
+        {
+            // If the trigger has been pressed, place the sphere randomly and reset the flag
+            if (!isTriggerPressed)
+            {
+                PlaceSphereRandomly();
+                isTriggerPressed = true;  // Ensure the function is only called once until the next trigger press
+            }
+        }
+
+        // Optional: Reset the flag if you want the function to be called again on the next trigger press
+        // You can adjust this based on your needs (e.g., for trials or repeated tests)
     }
 
     void PlaceSphereRandomly()
