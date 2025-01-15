@@ -5,11 +5,12 @@ using UnityEngine;
 public class RandomSpherePosition : MonoBehaviour
 {
     // Z-axis distances (depth from the participant)
-    public float[] distances = { 30, 50, 70 }; // Define the distances you want
+    public float[] distances = { 3, 5, 7 }; // Define the distances you want
     // Y-axis heights (vertical position)
-    public float[] heights = { 5, 10, 15 }; // Heights you want
+    public float[] heights = { 0.5f, 1.0f, 1.5f }; // Heights you want
 
     private Vector3 startingPosition;
+    
 
     // Number of trials
     public int trials = 18;

@@ -60,7 +60,7 @@ public class ExperimentController : MonoBehaviour
     {
         // Show experiment objects for 10 seconds
         experimentObjects.SetActive(true);
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
 
         // Turn the screen black
         TurnOnBlackScreen();
