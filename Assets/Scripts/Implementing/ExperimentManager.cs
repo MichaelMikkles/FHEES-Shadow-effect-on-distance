@@ -19,6 +19,7 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
     private bool isWalkingPhase = false;
     private bool experimentStarted = false;
     private GameObject currentSphere;
+    private GameObject shadowCreated;
 
     void Start()
     {
@@ -112,10 +113,9 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
         currentSphere = Instantiate(spherePrefab, position, Quaternion.identity);
         if (condition.shadow)
         {
-            ShadowPrefab = Instantiate(ShadowPrefab);
-            ShadowPrefab.transform.position = new Vector3(position.x, Plane.position.y + 0.01f, position.z);
-            ShadowPrefab.transform.localScale = Vector3.one * Mathf.Max(0.5f, condition.height * 0.2f); 
-            ShadowPrefab.transform.SetParent(currentSphere.transform); 
+            shadowCreated = Instantiate(ShadowPrefab);
+            shadowCreated.transform.position = new Vector3(position.x, Plane.position.y + 0.01f, position.z);
+            
         }
         //currentSphere.GetComponent<ShadowController>().SetShadow(condition.shadow);
 
@@ -125,6 +125,7 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
     void StartWalkingPhase()
     {
         Destroy(currentSphere);
+        Destroy(shadowCreated);
         blackScreenCanvas.SetActive(true);
         isWalkingPhase = true;
         instructionCanvas.SetActive(false);
