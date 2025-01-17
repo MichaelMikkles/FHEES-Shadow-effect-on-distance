@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4507805527809360417}
   - component: {fileID: 7519667173461917791}
   - component: {fileID: 5085416700823280370}
-  - component: {fileID: 200416172304282252}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -107,24 +106,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &200416172304282252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7325510421974311813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e553f168de59884689af6ad5ba2d191, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distances:
-  - 3
-  - 5
-  - 7
-  heights:
-  - 0
-  - 0.5
-  - 1
-  trials: 18

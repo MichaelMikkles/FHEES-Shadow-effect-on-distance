@@ -2,8 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class RandomSpherePosition : MonoBehaviour
 {
+    
+    private List<TrialCondition> conditions = new List<TrialCondition>();
+    void GenerateTrialConditions()
+    {
+        float[] distances = { 3f, 5f, 7f };
+        float[] heights = { 0f, 0.5f, 1f };
+        bool[] shadows = { true, false };
+
+        foreach (var distance in distances)
+        {
+            foreach (var height in heights)
+            {
+                foreach (var shadow in shadows)
+                {
+                    conditions.Add(new TrialCondition(distance, height, shadow));
+                }
+            }
+        }
+        Shuffle(conditions);
+    }
+
+    void Shuffle<T>(List<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            T temp = list[i];
+            int randomIndex = Random.Range(i, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
+    }
     // Z-axis distances (depth from the participant)
     public float[] distances = { 3, 5, 7 }; // Define the distances you want
     // Y-axis heights (vertical position)
@@ -24,8 +57,6 @@ public class RandomSpherePosition : MonoBehaviour
     {
         // Store the initial position of the sphere
         startingPosition = transform.position;
-
-
     }
 
     void Update()
@@ -49,6 +80,7 @@ public class RandomSpherePosition : MonoBehaviour
     {
         if (currentTrial < trials)
         {
+            TrialCondition condition = conditions[currentTrial];
             // Randomly select a distance and a height
             float selectedDistance = distances[Random.Range(0, distances.Length)];
             float selectedHeight = heights[Random.Range(0, heights.Length)];
@@ -61,6 +93,7 @@ public class RandomSpherePosition : MonoBehaviour
 
             // Update trial count
             currentTrial++;
+            isTriggerPressed = false;
         }
         else
         {

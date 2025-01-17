@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6985375210190846665}
   - component: {fileID: 2424553896977396119}
   - component: {fileID: 68743479961002993}
-  - component: {fileID: 2552901301804129030}
+  - component: {fileID: -7259216832495157846}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 15, z: 30}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,24 +106,24 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2552901301804129030
+--- !u!114 &-7259216832495157846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 114637237183857331}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e553f168de59884689af6ad5ba2d191, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   distances:
-  - 30
-  - 50
-  - 70
-  heights:
+  - 3
   - 5
-  - 10
-  - 15
+  - 7
+  heights:
+  - 0.5
+  - 1
+  - 1.5
   trials: 18

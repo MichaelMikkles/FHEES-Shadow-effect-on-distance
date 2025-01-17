@@ -5,16 +5,17 @@ using Microsoft.MixedReality.Toolkit.Input;
 
 public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
 {
-    public GameObject spherePrefab; // Sphere prefab
-    public Transform startPoint;    // Starting position for the sphere
-    public GameObject instructionCanvas; // Instruction canvas
-    public GameObject blackScreenCanvas; // Black screen canvas
+    public GameObject spherePrefab; // С��Ԥ����
+    public Transform startPoint;    // ��ʼ��λ��
+    public GameObject instructionCanvas; // ָʾ���� Canvas
+    public GameObject blackScreenCanvas; // ��Ļ Canvas
     public ParticipantTracker tracker;
     public DataLogger logger;
 
     private List<TrialCondition> conditions = new List<TrialCondition>();
     private int currentTrial = 0;
     private bool isWalkingPhase = false;
+    private bool experimentStarted = false;
     private GameObject currentSphere;
 
     void Start()
@@ -40,7 +41,7 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
             }
         }
 
-        // Shuffle the conditions to randomize trial order
+        // �����������˳��
         Shuffle(conditions);
     }
 
@@ -55,53 +56,45 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
         }
     }
 
-   void ShowInstruction()
-{
-    if (currentTrial >= conditions.Count)
+    void ShowInstruction()
     {
-        if (instructionCanvas == null)
+        if (currentTrial >= conditions.Count)
         {
-            Debug.LogError("instructionCanvas is null");
+            var instructionText = instructionCanvas.GetComponentInChildren<TextMeshPro>();
+            instructionText.text = "Thank you for your participation! Trigger to finish the experiment";
+            instructionCanvas.SetActive(true);
+            blackScreenCanvas.SetActive(false);
+            return;
         }
 
-        var instructionText = instructionCanvas.GetComponentInChildren<TextMeshPro>();
-        if (instructionText == null)
-        {
-            Debug.LogError("TextMeshPro component is missing from instructionCanvas or its children");
-        }
-        instructionText.text = "Thank you for your participation! All trials completed.";
+        var trial = conditions[currentTrial];
+        var instructionTextComponent = instructionCanvas.GetComponentInChildren<TextMeshPro>();
+        //instructionTextComponent.text = $"This is your {currentTrial + 1}/18 trial \n" +
+                                         //"Observe 10s and then take a blind-walking \n" +
+                                         //"Trigger to start";
         instructionCanvas.SetActive(true);
         blackScreenCanvas.SetActive(false);
-        return;
+        experimentStarted = false;
+        isWalkingPhase = false;
     }
 
-    var trial = conditions[currentTrial];
-    var instructionTextComponent = instructionCanvas.GetComponentInChildren<TextMeshPro>();
-    if (instructionTextComponent == null)
+    void Update()
     {
-        Debug.LogError("TextMeshPro component is missing from instructionCanvas or its children");
-    }
-    instructionTextComponent.text = $"Trial {currentTrial + 1}/18\n" +
-                                     "Observe the sphere for 10 seconds.\n" +
-                                     "Press the trigger to begin.";
-    instructionCanvas.SetActive(true);
-    blackScreenCanvas.SetActive(false);
-    isWalkingPhase = false;
-}
-
-
-    public void OnPointerClicked(MixedRealityPointerEventData eventData)
-    {
-        if (instructionCanvas.activeSelf)
+        if ((Input.GetButtonDown("Fire1")) )
         {
-            StartTrial();
-        }
-        else if (isWalkingPhase)
-        {
-            EndWalkingPhase();
+            if (instructionCanvas.activeSelf && !experimentStarted)
+            {
+                experimentStarted = true;
+                StartTrial();
+            }
+            else if (isWalkingPhase)
+            {
+                EndWalkingPhase();
+            }
         }
     }
 
+    public void OnPointerClicked(MixedRealityPointerEventData eventData) { }
     public void OnPointerDown(MixedRealityPointerEventData eventData) { }
     public void OnPointerDragged(MixedRealityPointerEventData eventData) { }
     public void OnPointerUp(MixedRealityPointerEventData eventData) { }
@@ -109,20 +102,15 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
     void StartTrial()
     {
         instructionCanvas.SetActive(false);
+        blackScreenCanvas.SetActive(false);
         tracker.ResetPosition(startPoint.position);
 
-        // Get the current trial condition
         TrialCondition condition = conditions[currentTrial];
-        
-        // Set the sphere's position based on the condition
         Vector3 position = startPoint.position + new Vector3(0, condition.height, condition.distance);
         currentSphere = Instantiate(spherePrefab, position, Quaternion.identity);
+        //currentSphere.GetComponent<ShadowController>().SetShadow(condition.shadow);
 
-        // Set the shadow of the sphere based on the condition
-        currentSphere.GetComponent<ShadowController>().SetShadow(condition.shadow);
-
-        // After 10 seconds, transition to the walking phase
-        Invoke(nameof(StartWalkingPhase), 10f);
+        Invoke(nameof(StartWalkingPhase), 5f); // 10������ä�߽׶�
     }
 
     void StartWalkingPhase()
@@ -130,19 +118,20 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
         Destroy(currentSphere);
         blackScreenCanvas.SetActive(true);
         isWalkingPhase = true;
+        instructionCanvas.SetActive(false);
+        experimentStarted = false;
 
         var instructionText = instructionCanvas.GetComponentInChildren<TextMeshPro>();
-        instructionText.text = "Walk to the estimated position of the sphere.\nPress the trigger when you are done.";
-        instructionCanvas.SetActive(true);
+        //instructionText.text = "Please walk to position of sphere\n and trigger to finish your walking";
     }
 
     void EndWalkingPhase()
     {
+        blackScreenCanvas.SetActive(false);
         float movedDistance = tracker.GetMovedDistance();
         TrialCondition condition = conditions[currentTrial];
         logger.LogData(currentTrial + 1, condition.distance, condition.height, condition.shadow, movedDistance);
 
-        // Proceed to the next trial
         currentTrial++;
         ShowInstruction();
     }
