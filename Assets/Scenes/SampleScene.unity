@@ -491,6 +491,11 @@ Transform:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1711867089 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5897199148776484325, guid: 1a0ebac4501b7f34a92310e9fd4c7a34, type: 3}
+  m_PrefabInstance: {fileID: 1737740244236243038}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1858635886
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,10 +691,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -7259216832495157846, guid: ea5d1dafe4c367a4d9968915930fda86, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 114637237183857331, guid: ea5d1dafe4c367a4d9968915930fda86, type: 3}
       propertyPath: m_Name
       value: Sphere
@@ -698,6 +699,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2424553896977396119, guid: ea5d1dafe4c367a4d9968915930fda86, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d5334c45caee46be937b095a1e977dc6, type: 2}
     - target: {fileID: 2552901301804129030, guid: ea5d1dafe4c367a4d9968915930fda86, type: 3}
       propertyPath: heights.Array.data[0]
       value: 0.5
@@ -724,15 +729,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4276175600146864088, guid: ea5d1dafe4c367a4d9968915930fda86, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4276175600146864088, guid: ea5d1dafe4c367a4d9968915930fda86, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4276175600146864088, guid: ea5d1dafe4c367a4d9968915930fda86, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4276175600146864088, guid: ea5d1dafe4c367a4d9968915930fda86, type: 3}
       propertyPath: m_LocalPosition.x
@@ -775,7 +780,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: -7259216832495157846, guid: ea5d1dafe4c367a4d9968915930fda86, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -806,7 +811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897199148776484325, guid: 1a0ebac4501b7f34a92310e9fd4c7a34, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.60000014
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5897199148776484325, guid: 1a0ebac4501b7f34a92310e9fd4c7a34, type: 3}
       propertyPath: m_LocalPosition.z
@@ -844,6 +849,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plane
       objectReference: {fileID: 0}
+    - target: {fileID: 7519667173461917791, guid: 1a0ebac4501b7f34a92310e9fd4c7a34, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 680505b4b4f3400f9fd3ebb242751819, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -898,6 +907,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3029941435417718044, guid: 8f6cacbd98c16f1499a1cbdf69cb86e5, type: 3}
+      propertyPath: Plane
+      value: 
+      objectReference: {fileID: 1711867089}
+    - target: {fileID: 3029941435417718044, guid: 8f6cacbd98c16f1499a1cbdf69cb86e5, type: 3}
       propertyPath: logger
       value: 
       objectReference: {fileID: 157335723}
@@ -909,6 +922,10 @@ PrefabInstance:
       propertyPath: startPoint
       value: 
       objectReference: {fileID: 1975056709}
+    - target: {fileID: 3029941435417718044, guid: 8f6cacbd98c16f1499a1cbdf69cb86e5, type: 3}
+      propertyPath: ShadowPrefab
+      value: 
+      objectReference: {fileID: 6731088601175650332, guid: 0e270cc77ad61d94e95467208483a60a, type: 3}
     - target: {fileID: 3029941435417718044, guid: 8f6cacbd98c16f1499a1cbdf69cb86e5, type: 3}
       propertyPath: spherePrefab
       value: 

@@ -11,6 +11,8 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
     public GameObject blackScreenCanvas; // ��Ļ Canvas
     public ParticipantTracker tracker;
     public DataLogger logger;
+    public GameObject ShadowPrefab;
+    public Transform Plane;
 
     private List<TrialCondition> conditions = new List<TrialCondition>();
     private int currentTrial = 0;
@@ -108,9 +110,16 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
         TrialCondition condition = conditions[currentTrial];
         Vector3 position = startPoint.position + new Vector3(0, condition.height, condition.distance);
         currentSphere = Instantiate(spherePrefab, position, Quaternion.identity);
+        if (condition.shadow)
+        {
+            ShadowPrefab = Instantiate(ShadowPrefab);
+            ShadowPrefab.transform.position = new Vector3(position.x, Plane.position.y + 0.01f, position.z);
+            ShadowPrefab.transform.localScale = Vector3.one * Mathf.Max(0.5f, condition.height * 0.2f); 
+            ShadowPrefab.transform.SetParent(currentSphere.transform); 
+        }
         //currentSphere.GetComponent<ShadowController>().SetShadow(condition.shadow);
 
-        Invoke(nameof(StartWalkingPhase), 5f); // 10������ä�߽׶�
+        Invoke(nameof(StartWalkingPhase), 5f); // 5 seconds to see the sphere
     }
 
     void StartWalkingPhase()
