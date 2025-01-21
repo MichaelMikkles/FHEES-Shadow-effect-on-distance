@@ -83,7 +83,7 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
 
     void Update()
     {
-        if ((Input.GetButtonDown("Fire1")) )
+        if (Input.GetButtonDown("Fire1"))
         {
             if (instructionCanvas.activeSelf && !experimentStarted)
             {
