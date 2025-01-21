@@ -5,10 +5,10 @@ using Microsoft.MixedReality.Toolkit.Input;
 
 public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
 {
-    public GameObject spherePrefab; // С��Ԥ����
-    public Transform startPoint;    // ��ʼ��λ��
-    public GameObject instructionCanvas; // ָʾ���� Canvas
-    public GameObject blackScreenCanvas; // ��Ļ Canvas
+    public GameObject spherePrefab; 
+    public Transform startPoint;    
+    public GameObject instructionCanvas; 
+    public GameObject blackScreenCanvas; 
     public ParticipantTracker tracker;
     public DataLogger logger;
     public GameObject ShadowPrefab;
@@ -44,7 +44,7 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
             }
         }
 
-        // �����������˳��
+        // Make object order random
         Shuffle(conditions);
     }
 
@@ -143,7 +143,7 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
         logger.LogData(currentTrial + 1, condition.distance, condition.height, condition.shadow, movedDistance);
 
         currentTrial++;
-        ShowInstruction();
+        Invoke(nameof(ShowInstruction), 1f); // wait 1s to avoid entering directly to next trial 
     }
 }
 
