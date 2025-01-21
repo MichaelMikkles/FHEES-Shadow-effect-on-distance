@@ -114,7 +114,7 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
         if (condition.shadow)
         {
             shadowCreated = Instantiate(ShadowPrefab);
-            shadowCreated.transform.position = new Vector3(position.x, Plane.position.y + 0.01f, position.z);
+            shadowCreated.transform.position = new Vector3(position.x, Plane.position.y + 0.05f, position.z);
             
         }
         //currentSphere.GetComponent<ShadowController>().SetShadow(condition.shadow);
