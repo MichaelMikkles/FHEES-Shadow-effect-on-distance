@@ -13,6 +13,7 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
     public DataLogger logger;
     public GameObject ShadowPrefab;
     public Transform Plane;
+    public GameObject Reminder;
 
     private List<TrialCondition> conditions = new List<TrialCondition>();
     private int currentTrial = 0;
@@ -104,6 +105,7 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
 
     void StartTrial()
     {
+        Reminder.SetActive(false);
         instructionCanvas.SetActive(false);
         blackScreenCanvas.SetActive(false);
         tracker.ResetPosition(startPoint.position);
@@ -137,6 +139,7 @@ public class ExperimentManager : MonoBehaviour, IMixedRealityPointerHandler
 
     void EndWalkingPhase()
     {
+        Reminder.SetActive(true);
         blackScreenCanvas.SetActive(false);
         float movedDistance = tracker.GetMovedDistance();
         TrialCondition condition = conditions[currentTrial];
